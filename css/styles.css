@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
   }
-  
+
   .container {
     display: flex;
     flex-direction: column;
@@ -13,20 +13,6 @@ body {
     justify-content: center;
     height: 100vh;
   }
-  
-  .box {
-    width: 40%;
-  }
-  
-  .audio-player {
-    margin-bottom: 20px;
-  }
-  
-  /* Reste des styles CSS... */
-  /* styles.css */
-
-/* Reste des styles */
-
 .box {
     width: 40%;
     background-color: #000; /* Fond noir */
@@ -35,16 +21,7 @@ body {
     border-radius: 8px; /* Coins arrondis */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
   }
-/* styles.css */
 
-/* Reste des styles... */
-
-
-  /* Reste des styles... */
-
-
-  /* Reste des styles... */
-/* Reste des styles... */
 
 
     
