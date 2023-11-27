@@ -6,30 +6,39 @@ const getBaseURL = () => {
 let template = document.createElement("template");
 template.innerHTML = `
 <style>
+h1 {
+    padding-left: 20px;
+}
 .audio-player {
-    margin-bottom: 20px;
-    border:3px solid yellow;
-  }
-  .audio-controls {
+    margin-bottom: 20px; 
+}
+.audio-controls {
     display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-  
-  .control {
+    align-items: left;
+    padding-left: 20px;
+}
+.control {
     margin-bottom: 15px;
-  }
+}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     integrity="...">
-<h1>mon super lecteur</h1>
+<h1>Mon lecteur</h1>
 <br>
-<div class="audio-player">
-    <div class="audio-wrapper">
-        <audio id="audio" controls></audio>
-    </div>
-</div>
 <div class="audio-controls">
+    <div class="control">
+    <button id="previous"><i class="fas fa-step-backward"></i></button>
+    <!-- Icône pour Previous -->
+    <button id="play"><i class="fas fa-play"></i></button>
+    <!-- Icône pour Play -->
+    <button id="pause"><i class="fas fa-pause"></i></button>
+    <!-- Icône pour Pause -->
+    <button id="stop"><i class="fas fa-stop"></i></button>
+    <!-- Icône pour Stop -->
+    <button id="next"><i class="fas fa-step-forward"></i></button>
+    <!-- Icône pour Next -->
+    </div>
     <div class="control">
         <label for="volume">Volume:</label>
         <input type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="1">
@@ -53,19 +62,14 @@ template.innerHTML = `
     </div>
 
 
-    <div class="control">
-        <button onclick="previousTrack()"><i class="fas fa-step-backward"></i></button>
-        <!-- Icône pour Previous -->
-        <button onclick="play()"><i class="fas fa-play"></i></button>
-        <!-- Icône pour Play -->
-        <button onclick="pause()"><i class="fas fa-pause"></i></button>
-        <!-- Icône pour Pause -->
-        <button onclick="stop()"><i class="fas fa-stop"></i></button>
-        <!-- Icône pour Stop -->
-        <button onclick="nextTrack()"><i class="fas fa-step-forward"></i></button>
-        <!-- Icône pour Next -->
+
+</div>
+<div class="audio-player">
+    <div class="audio-wrapper">
+        <audio id="audio" controls></audio>
     </div>
 </div>
+
 `;
 
 // ----- CLasse du Web Comppnent ------
@@ -83,7 +87,9 @@ export class MyPlayer extends HTMLElement {
 
         // le lecteur audio
         this.player = this.shadowRoot.querySelector("#audio");
-
+        // hide the audio tag
+        this.player.style.display = "none";
+        
         this.definirLesEcouteurs();
     }
 
@@ -108,6 +114,37 @@ export class MyPlayer extends HTMLElement {
 
             this.player.playbackRate = vitesse;
         });
+        // Fonction pour définir previous
+        this.shadowRoot.querySelector("#previous").addEventListener("click", (evt) => {
+            // evt.target est l'élément qui a déclenché l'événement, c'est le bouton previous
+            console.log("Previous");
+            this.playlist.previous();
+        });
+        // Fonction pour définir next
+        this.shadowRoot.querySelector("#next").addEventListener("click", (evt) => {
+            // evt.target est l'élément qui a déclenché l'événement, c'est le bouton next
+            console.log("Next");
+            this.playlist.next();
+        });
+        // Fonction pour définir play
+        this.shadowRoot.querySelector("#play").addEventListener("click", (evt) => {
+            // evt.target est l'élément qui a déclenché l'événement, c'est le bouton play
+            console.log("Play");
+            this.player.play();
+        });
+        // Fonction pour définir pause
+        this.shadowRoot.querySelector("#pause").addEventListener("click", (evt) => {
+            // evt.target est l'élément qui a déclenché l'événement, c'est le bouton pause
+            console.log("Pause");
+            this.player.pause();
+        });
+        // Fonction pour définir stop   
+        this.shadowRoot.querySelector("#stop").addEventListener("click", (evt) => {
+            // evt.target est l'élément qui a déclenché l'événement, c'est le bouton stop
+            console.log("Stop");
+            this.player.pause();
+            this.player.currentTime = 0;
+        });
     }
 
     setPlaylist(playlist) {
@@ -125,6 +162,22 @@ export class MyPlayer extends HTMLElement {
             this.player.src = trackURL;
             this.player.play();
         });
+
+    }
+    setTracklistlist(playlist) {
+        this.playlist = playlist;
+        console.log("LECTEUR : On veut jouer le prochain morceau " + evt.detail.trackUrl);
+         // Fonction pour définir next
+         this.shadowRoot.querySelector("#next").addEventListener("click", (evt) => {
+            // evt.target est l'élément qui a déclenché l'événement, c'est le bouton next
+            console.log("Next");
+            this.playlist.next();
+        });
+
+            const trackURL = new URL(evt.detail.trackUrl, baseURL);
+            this.player.src = trackURL;
+            this.player.play();
+       
 
     }
 

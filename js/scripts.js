@@ -10,5 +10,6 @@
     const playlist = document.querySelector("#playlist");
 
     player.setPlaylist(playlist);
+    player.setTracklist(playlist);
   }
   

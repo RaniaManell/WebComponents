@@ -12,10 +12,13 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    
   }
 .box {
     width: 40%;
-    background-color: #000; /* Fond noir */
+    background-image: url("components/assets/img.png");
+    background-color: black;
+    background-image: cover;
     color: #fff; /* Texte blanc */
     padding: 20px; /* Espacement intérieur */
     border-radius: 8px; /* Coins arrondis */
