@@ -7,24 +7,50 @@ body {
   }
 
   .container {
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    
   }
+
 .box {
-    width: 40%;
-    background-image: url("components/assets/img.png");
-    background-color: black;
-    background-image: cover;
+    display: flex;
+    width: 60%;
+    height: 500px;
+    background-image: url("/components/assets/bg.png");
+    background-size: cover;
     color: #fff; /* Texte blanc */
-    padding: 20px; /* Espacement intérieur */
+    padding-top: 60px; /* Espacement intérieur */
+    padding-left: 80px;
     border-radius: 8px; /* Coins arrondis */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    padding-right: 0px;
+    padding-bottom: 0px;
+    margin: 0px;
+  }
+.playler-box {
+    padding-top: 140PX;
+    padding-left: 100px;
+    color: #fff; /* Texte blanc */
+    height: 100%; 
+}
+.playlist-box {
+    border-color: #a17653;
+    border-style: solid;
+    border-width: 15px;
+    background-color: #404041;
+    padding: 0px; /* Espacement intérieur */
+    padding-right: 10px;
+    width: 60%;
+    border-radius: 25px;
+    margin-right: 0px;
+    margin-left: 10px;
+    margin-top: 10px;
+    
+  }
+  .visuel{
+    width: 400px;
+    height: 400px;
   }
 
+ 
 
-
-    

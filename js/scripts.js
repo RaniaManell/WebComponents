@@ -9,7 +9,8 @@
     // on récupère la playlist
     const playlist = document.querySelector("#playlist");
 
+
     player.setPlaylist(playlist);
-    player.setTracklist(playlist);
   }
+  
   
