@@ -4,7 +4,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+
   }
+.music-background{
+  background-image: url("/components/assets/bgg.gif");
+  background-size: cover;
+  width: 100%;
+
+}
 
   .container {
 
@@ -51,6 +58,7 @@ body {
     width: 400px;
     height: 400px;
   }
+  
 
  
 
