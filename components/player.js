@@ -58,6 +58,8 @@ margin-bottom: 0px;
 }
 
 
+
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
 
@@ -118,7 +120,40 @@ margin-bottom: 0px;
     </div>
     
 </div>
-
+<div id= "equalizer" class="audio-equalizer">
+    <h2>Equalizer</h2>
+    <div class="controls">
+    <label for="slider1">60Hz</label>
+    <input type="range" id="slider1" value="0" step="1" min="-30" max="30"></input>
+  <output id="gain0">0 dB</output>
+  </div>
+  <div class="controls">
+    <label for="slider2">170Hz</label>
+    <input type="range" id="slider2" value="0" step="1" min="-30" max="30" ></input>
+<output id="gain1">0 dB</output>
+  </div>
+  <div class="controls">
+    <label for="slider3">350Hz</label>
+    <input type="range" id="slider3" value="0" step="1" min="-30" max="30" ></input>
+<output id="gain2">0 dB</output>
+  </div>
+  <div class="controls">
+    <label for="slider4">1000Hz</label>
+    <input type="range" id="slider4" value="0" step="1" min="-30" max="30" ></input>
+<output id="gain3">0 dB</output>
+  </div>
+  <div class="controls">
+    <label for="slider5">3500Hz</label>
+    <input type="range" id="slider5" value="0" step="1" min="-30" max="30" ></input>
+<output id="gain4">0 dB</output>
+  </div>
+  <div class="controls">
+    <label for="slider6">10000Hz</label>
+    <input type="range" id="slider6" value="0" step="1" min="-30" max="30" oninput="changeGain(this.value, 5);"></input>
+<output id="gain5">0 dB</output>
+  </div>
+  </div>
+  
 `;
 
 // ----- CLasse du Web Comppnent ------
@@ -139,7 +174,8 @@ export class MyPlayer extends HTMLElement {
         this.player = this.shadowRoot.querySelector("#audio");
         // hide the audio tag
         this.player.style.display = "none";
-
+         // Add the equalizer to the player instance
+        this.equalizer = this.shadowRoot.querySelector("#equalizer");
         this.definirLesEcouteurs();
   
        
@@ -199,6 +235,14 @@ export class MyPlayer extends HTMLElement {
             this.player.pause();
             this.player.currentTime = 0;
         });
+         // Listen for the 'input' event from the equalizer sliders
+         this.equalizer.querySelectorAll("input[type='range']").forEach((slider, index) => {
+        slider.addEventListener("input", () => {
+          // Log the value whenever a slider is moved
+          console.log(`Slider ${slider.id} value: ${slider.value}`);
+          this.applyEqualizer();
+        });
+      });
     }
 
     setPlaylist(playlist) {
@@ -219,9 +263,65 @@ export class MyPlayer extends HTMLElement {
 
     }
 
+    applyEqualizer() {
+        // Create the AudioContext and sourceNode if not already created
+        if (!this.context) {
+          this.context = new AudioContext();
+          this.mediaElement = this.shadowRoot.getElementById('audio'); // Assuming your audio element has the id 'audio'
+          this.sourceNode = this.context.createMediaElementSource(this.mediaElement);
+      
+          // Handle the resume on play
+          this.mediaElement.onplay = () => {
+            this.context.resume();
+          }
+      
+          // Create the equalizer filters
+          this.filters = [];
+      
+          // Set filters
+          [60, 170, 350, 1000, 3500, 10000].forEach((freq, i) => {
+            const eq = this.context.createBiquadFilter();
+            eq.frequency.value = freq;
+            eq.type = "peaking";
+            eq.gain.value = 0;
+            this.filters.push(eq);
+          });
+      
+          // Connect filters in series
+          this.sourceNode.connect(this.filters[0]);
+          for (let i = 0; i < this.filters.length - 1; i++) {
+            this.filters[i].connect(this.filters[i + 1]);
+          }
+      
+          // Connect the last filter to the speakers
+          this.filters[this.filters.length - 1].connect(this.context.destination);
+        }
+      
+        // Adjust gain values based on equalizer settings
+        const sliders = this.equalizer.querySelectorAll("input[type='range']");
+        sliders.forEach((slider, index) => {
+          const sliderValue = parseFloat(slider.value);
+          const nbFilter = index; // Assuming the index of the slider corresponds to the filter number
+      
+          // Adjust gain for the specified filter
+          this.changeGain(sliderValue, nbFilter);
+        });
+      
+        console.log("Equalizer settings applied");
+      }
+      
+      changeGain(sliderVal, nbFilter) {
+        const value = parseFloat(sliderVal);
+        this.filters[nbFilter].gain.value = value;
+      
+        // Update output labels (you can add this if needed)
+        // var output = document.querySelector("#gain" + nbFilter);
+        // output.value = value + " dB";
+      }
+      
+    }
+    
+    
 
-    
-    
-}
 
 customElements.define("my-player", MyPlayer);
