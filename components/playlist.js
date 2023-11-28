@@ -15,16 +15,15 @@ template.innerHTML = `
     cursor: pointer;
     color: #fff; /* Couleur par défaut pour le texte */
     transition: color 0.3s ease; /* Transition de couleur au survol */
-  }
+}
   
-  .tracklist li:hover {
+.tracklist li:hover {
     background-color: #6d4b2f;
-  }
+}
   
-  .tracklist li.active {
-    color: #fff; /* Couleur blanche pour l'élément actif */
-    background-color: #6d4b2f; /* Vert flashy pour l'élément actif */
-  }
+.tracklist li:active {
+    background-color: #eaac2f; 
+}
 
 </style>
 <div class="playlist">
