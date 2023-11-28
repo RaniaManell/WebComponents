@@ -25,7 +25,9 @@ body {
     width: 45%;
     height: 370px;
     background-image: url("/components/assets/bg.png");
-    background-size: cover;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #fff; /* Texte blanc */
     padding-top: 60px; /* Espacement intérieur */
     padding-left: 80px;
