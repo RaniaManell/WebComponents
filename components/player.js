@@ -25,14 +25,14 @@ template.innerHTML = `
 .controls {
     width: 400px;
     padding-top: 0px;
-    margin-top: 60px;
-    padding-left: 233px;
+    margin-top: 40px;
+    padding-left: 158px;
 
 }
 .btn {background-color: #838388;
     height: 20px;
-    width: 43px;
-    margin-right: 2px;
+    width: 33px;
+    margin-right: 0px;
     shadow: 0 0 0 0;
     border : 0 none;
 }
@@ -70,27 +70,26 @@ margin-bottom: 0px;
 <div class="audio-controls">
     <div class="div-controls">
         <div class="autre-controls">
-        <div id= "equalizer">
-           
-
-            <div class="control">
-                <label for="volume">Volume:</label>
-                <input type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
-            </div>
-            <div class="control">
-                <label for="vitesse">Vitesse:</label>
-                <input type="range" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
-                &nbsp;<span id="vitesseValue">1</span>
-            </div>
-        </div>   
+            <div id= "equalizer">
+                <div class="control">
+                    <label for="volume">Volume:</label>
+                    <input type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
+                </div>
+                <div class="control">
+                    <label for="vitesse">Vitesse:</label>
+                    <input type="range" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
+                    &nbsp;<span id="vitesseValue">1</span>
+                </div>
+            </div>   
         </div>
+    </div>
         <!-- <div class="control-auteur">
             <div class="control auteur">
                 <p>Nouar Rania Manel</p>
                 <p>Gasmi Zeyneb</p>
             </div>
         </div> -->  
-    </div>
+    
     <div class="control controls">
         <button class ="btn" id="previous"><i class="fas fa-step-backward"></i></button>
         <!-- Icône pour Previous -->
