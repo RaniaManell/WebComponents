@@ -68,6 +68,38 @@ margin-bottom: 0px;
 <div class="audio-controls">
     <div class="div-controls">
         <div class="autre-controls">
+        <div id= "equalizer">
+            <div class="control">
+                <label for="slider1">60Hz</label>
+                <input type="range" id="slider1" value="0" step="1" min="-30" max="30"></input>
+            <output id="gain0">0 dB</output>
+            </div>
+            <div class="control">
+                <label for="slider2">170Hz</label>
+                <input type="range" id="slider2" value="0" step="1" min="-30" max="30" ></input>
+            <output id="gain1">0 dB</output>
+            </div>
+            <div class="control">
+                <label for="slider3">350Hz</label>
+                <input type="range" id="slider3" value="0" step="1" min="-30" max="30" ></input>
+            <output id="gain2">0 dB</output>
+            </div>
+            <div class="control">
+                <label for="slider4">1000Hz</label>
+                <input type="range" id="slider4" value="0" step="1" min="-30" max="30" ></input>
+            <output id="gain3">0 dB</output>
+            </div>
+            <div class="control">
+                <label for="slider5">3500Hz</label>
+                <input type="range" id="slider5" value="0" step="1" min="-30" max="30" ></input>
+            <output id="gain4">0 dB</output>
+            </div>
+            <div class="control">
+                <label for="slider6">10000Hz</label>
+                <input type="range" id="slider6" value="0" step="1" min="-30" max="30" oninput="changeGain(this.value, 5);"></input>
+            <output id="gain5">0 dB</output>
+            </div>
+
             <div class="control">
                 <label for="volume">Volume:</label>
                 <input type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
@@ -77,18 +109,7 @@ margin-bottom: 0px;
                 <input type="range" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
                 &nbsp;<span id="vitesseValue">1</span>
             </div>
-            <div class="control">
-                <label for="balance">Balance:</label>
-                <input type="range" id="balance" name="balance" min="-1" max="1" step="0.1" value="0" onchange="setBalance()">
-            </div>
-            <div class="control">
-                <label for="bass">Basses:</label>
-                <input type="range" id="bass" name="bass" min="0" max="10" step="0.1" value="5" onchange="setBass()">
-            </div>
-            <div class="control">
-                <label for="treble">Aigus:</label>
-                <input type="range" id="treble" name="treble" min="0" max="10" step="0.1" value="5" onchange="setTreble()">
-            </div>
+        </div>   
         </div>
         <div class="control-auteur">
             <div class="control auteur">
@@ -120,39 +141,7 @@ margin-bottom: 0px;
     </div>
     
 </div>
-<div id= "equalizer" class="audio-equalizer">
-    <h2>Equalizer</h2>
-    <div class="controls">
-    <label for="slider1">60Hz</label>
-    <input type="range" id="slider1" value="0" step="1" min="-30" max="30"></input>
-  <output id="gain0">0 dB</output>
-  </div>
-  <div class="controls">
-    <label for="slider2">170Hz</label>
-    <input type="range" id="slider2" value="0" step="1" min="-30" max="30" ></input>
-<output id="gain1">0 dB</output>
-  </div>
-  <div class="controls">
-    <label for="slider3">350Hz</label>
-    <input type="range" id="slider3" value="0" step="1" min="-30" max="30" ></input>
-<output id="gain2">0 dB</output>
-  </div>
-  <div class="controls">
-    <label for="slider4">1000Hz</label>
-    <input type="range" id="slider4" value="0" step="1" min="-30" max="30" ></input>
-<output id="gain3">0 dB</output>
-  </div>
-  <div class="controls">
-    <label for="slider5">3500Hz</label>
-    <input type="range" id="slider5" value="0" step="1" min="-30" max="30" ></input>
-<output id="gain4">0 dB</output>
-  </div>
-  <div class="controls">
-    <label for="slider6">10000Hz</label>
-    <input type="range" id="slider6" value="0" step="1" min="-30" max="30" oninput="changeGain(this.value, 5);"></input>
-<output id="gain5">0 dB</output>
-  </div>
-  </div>
+
   
 `;
 
