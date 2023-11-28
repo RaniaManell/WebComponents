@@ -1,5 +1,5 @@
 // utile pour récupérer l'URL du composant
-import {equalizer} from components/equalizer.js;
+//import {equalizer} from components/equalizer.js;
 
 const getBaseURL = () => {
     return new URL('.', import.meta.url);
