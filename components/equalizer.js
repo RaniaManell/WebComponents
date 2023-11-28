@@ -38,24 +38,8 @@ template.innerHTML = `
                 <input type="range" id="slider6" value="0" step="1" min="-30" max="30" oninput="changeGain(this.value, 5);"></input>
             <output id="gain5">0 dB</output>
             </div>
-
-            <div class="control">
-                <label for="volume">Volume:</label>
-                <input type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
-            </div>
-            <div class="control">
-                <label for="vitesse">Vitesse:</label>
-                <input type="range" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
-                &nbsp;<span id="vitesseValue">1</span>
-            </div>
         </div>   
-        </div>
-        <div class="control-auteur">
-            <div class="control auteur">
-                <p>Nouar Rania Manel</p>
-                <p>Gasmi Zeyneb</p>
-            </div>
-        </div>   
+        </div>  
     </div>`;
     export class MyEqualizer extends HTMLElement {
         constructor() {
