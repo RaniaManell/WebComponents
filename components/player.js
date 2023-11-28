@@ -1,8 +1,6 @@
 // utile pour récupérer l'URL du composant
-//import {equalizer} from components/equalizer.js;
-
 const getBaseURL = () => {
-    return new URL('.', import.meta.url);
+	return new URL('.', import.meta.url);
 };
 
 let template = document.createElement("template");
@@ -23,14 +21,14 @@ template.innerHTML = `
     margin-bottom: 15px;
 }
 .controls {
-    width: 400px;
+    width: 700px;
     padding-top: 0px;
-    margin-top: 40px;
-    padding-left: 158px;
+    margin-top: 44px;
+    padding-left: 30px;
 
 }
 .btn {background-color: #838388;
-    height: 20px;
+    height: 15px;
     width: 33px;
     margin-right: 0px;
     shadow: 0 0 0 0;
@@ -43,12 +41,11 @@ template.innerHTML = `
     padding-left: 20px;
     padding-top: 2px;
     padding-bottom: 2px;
-   
+}
 .p{
 margin-bottom: 0px;
 
 }
-
 .div-controls{
     display: flex;
     flex-direction: column;
@@ -59,39 +56,77 @@ margin-bottom: 0px;
 .control-auteur{
     width: 50%;
 }
-.rang {
-    accent-color: #d0a481;
+.rang{
+    accent-color:#d0a481
 }
+.vol{
+    margin-right: 120px;
+}
+.vit{
+    margin-left: 120px;
+
+}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
 
-<br>
 
 <div class="audio-controls">
     <div class="div-controls">
         <div class="autre-controls">
-            <div id= "equalizer">
-                <div class="control">
-                    <label for="volume">Volume:</label>
-                    <input style="accent-color: #d0a481" type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
-                    &nbsp;<span id="volume">1</span>
-                    </div>
-                <div class="control">
-                    <label for="vitesse">Vitesse:</label>
-                    <input style="accent-color: #d0a481" type="range" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
-                    &nbsp;<span id="vitesseValue">1</span>
-                </div>
-            </div>   
+        <div id= "equalizer">
+            <div class="control">
+                <label for="slider1">60Hz</label>
+                <input class="rang" style="margin-left:38px" type="range" id="slider1" value="0" step="1" min="-30" max="30"></input>
+            <output id="gain0">0 dB</output>
+            </div>
+            <div class="control">
+                <label for="slider2">170Hz</label>
+                <input class="rang" style="margin-left:30px" type="range" id="slider2" value="0" step="1" min="-30" max="30" ></input>
+            <output id="gain1">0 dB</output>
+            </div>
+            <div class="control">
+                <label for="slider3">350Hz</label>
+                <input class="rang" style="margin-left:30px" type="range" id="slider3" value="0" step="1" min="-30" max="30" ></input>
+            <output id="gain2">0 dB</output>
+            </div>
+            <div class="control">
+                <label for="slider4">1000Hz</label>
+                <input class="rang" style="margin-left:20px" type="range" id="slider4" value="0" step="1" min="-30" max="30" ></input>
+            <output id="gain3">0 dB</output>
+            </div>
+            <div class="control">
+                <label for="slider5">3500Hz</label>
+                <input class="rang" style="margin-left:20px" type="range" id="slider5" value="0" step="1" min="-30" max="30" ></input>
+            <output id="gain4">0 dB</output>
+            </div>
+            <div class="control">
+                <label for="slider6">10000Hz</label>
+                <input class="rang" style="margin-left:10px" type="range" id="slider6" value="0" step="1" min="-30" max="30" oninput="changeGain(this.value, 5);"></input>
+            <output id="gain5">0 dB</output>
+            </div>
+<!--
+            <div class="control">
+                <label for="volume">Volume:</label>
+                <input type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
+            </div>
+            <div class="control">
+                <label for="vitesse">Vitesse:</label>
+                <input type="range" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
+                &nbsp;<span id="vitesseValue">1</span>
+            </div> -->
+        </div>   
         </div>
-    </div>
-        <!-- <div class="control-auteur">
+      <!--  <div class="control-auteur">
             <div class="control auteur">
                 <p>Nouar Rania Manel</p>
                 <p>Gasmi Zeyneb</p>
             </div>
-        </div> -->  
-    
+        </div>   -->
+    </div>
     <div class="control controls">
+    <input style="width:20px; margin-right:100px" class ="vol" type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
+            
         <button class ="btn" id="previous"><i class="fas fa-step-backward"></i></button>
         <!-- Icône pour Previous -->
         <button class ="btn" id="play"><i class="fas fa-play"></i></button>
@@ -102,6 +137,8 @@ margin-bottom: 0px;
         <!-- Icône pour Stop -->
         <button class ="btn" id="next"><i class="fas fa-step-forward"></i></button>
         <!-- Icône pour Next -->
+        <input style="width:20px; margin-left:90px" class ="vit" type="range" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
+               
     </div>
 
 
@@ -136,23 +173,14 @@ export class MyPlayer extends HTMLElement {
         this.player = this.shadowRoot.querySelector("#audio");
         // hide the audio tag
         this.player.style.display = "none";
-        // Add the equalizer to the player instance
-        this.equalizer = this.shadowRoot.querySelector("my-equalizer");
-
-        this.buildAudioGraph();
-
+         // Add the equalizer to the player instance
+        this.equalizer = this.shadowRoot.querySelector("#equalizer");
         this.definirLesEcouteurs();
-
-
+  
+       
     }
 
     definirLesEcouteurs() {
-
-        // Handle the resume on play
-        this.mediaElement.onplay = () => {
-            this.context.resume();
-        }
-
         // Fonctions pour jouer, mettre en pause et arrêter la lecture, regler le volume etc.
         this.shadowRoot.querySelector("#volume").addEventListener("input", (evt) => {
             // evt.target est l'élément qui a déclenché l'événement, c'est le slider de volume
@@ -161,7 +189,7 @@ export class MyPlayer extends HTMLElement {
             console.log("Type de la valeur : " + typeof vol);
 
             this.player.volume = vol;
-
+          
         });
 
         // Fonction pour définir la vitesse de lecture
@@ -179,7 +207,7 @@ export class MyPlayer extends HTMLElement {
             // evt.target est l'élément qui a déclenché l'événement, c'est le bouton previous
             console.log("Previous");
             this.playlist.previous();
-
+         
         });
         // Fonction pour définir next
         this.shadowRoot.querySelector("#next").addEventListener("click", (evt) => {
@@ -206,6 +234,14 @@ export class MyPlayer extends HTMLElement {
             this.player.pause();
             this.player.currentTime = 0;
         });
+         // Listen for the 'input' event from the equalizer sliders
+         this.equalizer.querySelectorAll("input[type='range']").forEach((slider, index) => {
+        slider.addEventListener("input", () => {
+          // Log the value whenever a slider is moved
+          console.log(`Slider ${slider.id} value: ${slider.value}`);
+          this.applyEqualizer();
+        });
+      });
     }
 
     setPlaylist(playlist) {
@@ -213,7 +249,7 @@ export class MyPlayer extends HTMLElement {
 
         this.playlist.addEventListener("playsong", (evt) => {
             console.log("LECTEUR : On veut jouer le morceau " + evt.detail.trackUrl);
-
+        
             // on transforme l'URL relative en URL absolue
             // on récupère l'URL de base du composant
             const baseURL = getBaseURL();
@@ -226,22 +262,65 @@ export class MyPlayer extends HTMLElement {
 
     }
 
-    buildAudioGraph() {
-        this.context = new AudioContext();
-        this.mediaElement = this.shadowRoot.getElementById('audio'); // Assuming your audio element has the id 'audio'
-        this.sourceNode = this.context.createMediaElementSource(this.mediaElement);
-
-        // On connecte le lecteur audio (sourceNode) au graphe auidio de l'equalizer
-        // Le graphe audio de l'équalizer utilise le meme contexte audio
-        this.equalizer.setContext(this.context);
-        // on connecte...
-        this.sourceNode.connect(this.equalizer.getInputNode());
-        this.equalizer.getOutputNode().connect(this.context.destination);
+    applyEqualizer() {
+        // Create the AudioContext and sourceNode if not already created
+        if (!this.context) {
+          this.context = new AudioContext();
+          this.mediaElement = this.shadowRoot.getElementById('audio'); // Assuming your audio element has the id 'audio'
+          this.sourceNode = this.context.createMediaElementSource(this.mediaElement);
+      
+          // Handle the resume on play
+          this.mediaElement.onplay = () => {
+            this.context.resume();
+          }
+      
+          // Create the equalizer filters
+          this.filters = [];
+      
+          // Set filters
+          [60, 170, 350, 1000, 3500, 10000].forEach((freq, i) => {
+            const eq = this.context.createBiquadFilter();
+            eq.frequency.value = freq;
+            eq.type = "peaking";
+            eq.gain.value = 0;
+            this.filters.push(eq);
+          });
+      
+          // Connect filters in series
+          this.sourceNode.connect(this.filters[0]);
+          for (let i = 0; i < this.filters.length - 1; i++) {
+            this.filters[i].connect(this.filters[i + 1]);
+          }
+      
+          // Connect the last filter to the speakers
+          this.filters[this.filters.length - 1].connect(this.context.destination);
+        }
+      
+        // Adjust gain values based on equalizer settings
+        const sliders = this.equalizer.querySelectorAll("input[type='range']");
+        sliders.forEach((slider, index) => {
+          const sliderValue = parseFloat(slider.value);
+          const nbFilter = index; // Assuming the index of the slider corresponds to the filter number
+      
+          // Adjust gain for the specified filter
+          this.changeGain(sliderValue, nbFilter);
+        });
+      
+        console.log("Equalizer settings applied");
+      }
+      
+      changeGain(sliderVal, nbFilter) {
+        const value = parseFloat(sliderVal);
+        this.filters[nbFilter].gain.value = value;
+      
+        // Update output labels (you can add this if needed)
+        // var output = document.querySelector("#gain" + nbFilter);
+        // output.value = value + " dB";
+      }
+      
     }
-   
-}
-
-
+    
+    
 
 
 customElements.define("my-player", MyPlayer);

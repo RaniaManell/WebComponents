@@ -1,66 +1,87 @@
 /* styles.css */
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 
-  }
+}
 .music-background{
-  background-image: url("/components/assets/bgg.gif");
-  background-size: cover;
-  width: 100%;
+background-image: url("/components/assets/bgg.gif");
+background-size: cover;
+width: 100%;
+justify-content: center;
+align-items: center;
 
 }
 
-  .container {
+.container {
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .box {
-    display: flex;
-    width: 620px;
-    height: 370px;
-    background-image: url("/components/assets/bg.png");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #fff; /* Texte blanc */
-    padding-top: 60px; /* Espacement intérieur */
-    padding-left: 80px;
-    border-radius: 8px; /* Coins arrondis */
-    padding-right: 0px;
-    padding-bottom: 0px;
-    margin: 0px;
-  }
+  display: flex;
+  width: 640px;
+  height: 370px;
+  background-image: url("/components/assets/bg.png");
+  background-size: contain;
+  background-position: 0px;
+  background-repeat: no-repeat;
+  color: #fff; /* Texte blanc */
+  padding-top: 60px; /* Espacement intérieur */
+  padding-left: 80px;
+  border-radius: 8px; /* Coins arrondis */
+  padding-right: 0px;
+  padding-bottom: 0px;
+  margin: 0px;
+}
 .playler-box {
-    padding-top: 140PX;
-    padding-left: 100px;
-    color: #fff; /* Texte blanc */
-    height: 100%; 
+  padding-top: 140PX;
+  padding-left: 100px;
+  color: #fff; /* Texte blanc */
+  height: 100%; 
+  width: 300px;
 }
 .playlist-box {
-    border-color: #a17653;
-    border-style: solid;
-    border-width: 15px;
-    background-color: #404041;
-    padding: 0px; /* Espacement intérieur */
-    padding-right: 10px;
-    width: 620px;
-    border-radius: 25px;
-    margin-right: 0px;
-    margin-left: 10px;
-    margin-top: 10px;
-    
-  }
-  .visuel{
-    width: 400px;
-    height: 400px;
-  }
+  border-color: #a17653;
+  border-style: solid;
+  border-width: 15px;
+  background-color: #404041;
+  padding: 0px; /* Espacement intérieur */
+  padding-right: 10px;
+  width: 640px;
+  border-radius: 25px;
+  margin-right: 0px;
+  margin-left: 0px;
+  margin-top: 10px;
   
+}
+.visuel{
+  width: 400px;
+  height: 400px;
+}
 
- 
-
+.auteur{
+  background-color: #58595b;
+  border-radius: 5px;
+  width: 200px;
+  padding-left: 20px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.control-auteur{
+  width:200px;
+  position: absolute;
+  top: 110px; /* Replace 100px with your desired y-coordinate */
+  left: 320px;
+}
+.cont{
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  max-height: 200px;
+  position: relative;
+}
