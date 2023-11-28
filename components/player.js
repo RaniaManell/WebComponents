@@ -140,7 +140,7 @@ margin-bottom: 0px;
         <button class ="btn" id="next"><i class="fas fa-step-forward"></i></button>
         <!-- Icône pour Next -->
         <input style="width:20px; margin-left:90px" class ="vit" type="range" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
-               
+        <span id="vitesseValue" style="display:none">1</span>    
     </div>
 
 
