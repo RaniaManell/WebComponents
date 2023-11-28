@@ -67,13 +67,16 @@ align-items: center;
 .auteur{
   background-color: #58595b;
   border-radius: 5px;
-  width: 200px;
+  width: 170px;
   padding-left: 20px;
   padding-top: 2px;
   padding-bottom: 2px;
+  border-color: #eaac2f;
+  border-style: solid;
+  border-width: 5px;
 }
 .control-auteur{
-  width:200px;
+  width:170px;
   position: absolute;
   top: 110px; /* Replace 100px with your desired y-coordinate */
   left: 320px;

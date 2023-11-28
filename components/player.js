@@ -57,13 +57,15 @@ margin-bottom: 0px;
     width: 50%;
 }
 .rang{
-    accent-color:#d0a481
+    accent-color:#eaac2f
 }
 .vol{
     margin-right: 120px;
+    accent-color:#eaac2f
 }
 .vit{
     margin-left: 120px;
+    accent-color:#eaac2f
 
 }
 
@@ -125,7 +127,7 @@ margin-bottom: 0px;
         </div>   -->
     </div>
     <div class="control controls">
-    <input style="width:20px; margin-right:100px" class ="vol" type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
+    <input style="width:20px; margin-right:98px" class ="vol" type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
             
         <button class ="btn" id="previous"><i class="fas fa-step-backward"></i></button>
         <!-- Icône pour Previous -->
