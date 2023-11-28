@@ -4,6 +4,11 @@ const getBaseURL = () => {
 
 let template = document.createElement("template");
 template.innerHTML = `
+<style>
+input[type="range"] {
+    accent-color: #d0a481;
+  }
+</style>
 <div class="audio-controls">
     <div class="div-controls">
         <div class="autre-controls">
@@ -91,7 +96,7 @@ export class MyEqualizer extends HTMLElement {
 
         // Set filters
         [60, 170, 350, 1000, 3500, 10000].forEach((freq, i) => {
-            const eq = ctx.createBiquadFilter();
+            const eq = this.context.createBiquadFilter();
             eq.frequency.value = freq;
             eq.type = "peaking";
             eq.gain.value = 0;

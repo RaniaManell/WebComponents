@@ -48,6 +48,7 @@ template.innerHTML = `
 margin-bottom: 0px;
 
 }
+
 .div-controls{
     display: flex;
     flex-direction: column;
@@ -58,10 +59,9 @@ margin-bottom: 0px;
 .control-auteur{
     width: 50%;
 }
-
-
-
-
+.rang {
+    accent-color: #d0a481;
+}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
 
@@ -73,11 +73,12 @@ margin-bottom: 0px;
             <div id= "equalizer">
                 <div class="control">
                     <label for="volume">Volume:</label>
-                    <input type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
-                </div>
+                    <input style="accent-color: #d0a481" type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
+                    &nbsp;<span id="volume">1</span>
+                    </div>
                 <div class="control">
                     <label for="vitesse">Vitesse:</label>
-                    <input type="range" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
+                    <input style="accent-color: #d0a481" type="range" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
                     &nbsp;<span id="vitesseValue">1</span>
                 </div>
             </div>   
