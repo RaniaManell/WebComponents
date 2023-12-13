@@ -2,13 +2,15 @@
 <html>
 
 <head>
-  <title>Webamp Replica</title>
+  <title>My audio TP</title>
   <link rel="stylesheet" href="css/styles.css">
   <!-- ... Autres balises d'en-tête ... -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     integrity="...">
     <script src="components/player.js" type="module"></script>
     <script src="components/playlist.js" type="module"></script>
+    <script src="components/equalizer/equilizer.js" type="module"></script>
+    <script src="components/balance/balance.js" type="module"></script>
     <script src="js/scripts.js"></script>
     <title>Audio Visualizer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
@@ -33,9 +35,12 @@
         </div>  
       </div>
     </div>
+   
     <div class="playlist-box">
       <my-playlist id="playlist"></my-playlist>
     </div>
+    
+   
     </div>
   </div>
 </div>

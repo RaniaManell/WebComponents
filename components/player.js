@@ -1,4 +1,7 @@
 // utile pour récupérer l'URL du composant
+import "./equalizer/equilizer.js";
+import "./balance/balance.js";
+
 const getBaseURL = () => {
 	return new URL('.', import.meta.url);
 };
@@ -76,38 +79,9 @@ margin-bottom: 0px;
 <div class="audio-controls">
     <div class="div-controls">
         <div class="autre-controls">
-        <div id= "equalizer">
-            <div class="control">
-                <label for="slider1">60Hz</label>
-                <input class="rang" style="margin-left:38px" type="range" id="slider1" value="0" step="1" min="-30" max="30"></input>
-            <output id="gain0">0 dB</output>
-            </div>
-            <div class="control">
-                <label for="slider2">170Hz</label>
-                <input class="rang" style="margin-left:30px" type="range" id="slider2" value="0" step="1" min="-30" max="30" ></input>
-            <output id="gain1">0 dB</output>
-            </div>
-            <div class="control">
-                <label for="slider3">350Hz</label>
-                <input class="rang" style="margin-left:30px" type="range" id="slider3" value="0" step="1" min="-30" max="30" ></input>
-            <output id="gain2">0 dB</output>
-            </div>
-            <div class="control">
-                <label for="slider4">1000Hz</label>
-                <input class="rang" style="margin-left:20px" type="range" id="slider4" value="0" step="1" min="-30" max="30" ></input>
-            <output id="gain3">0 dB</output>
-            </div>
-            <div class="control">
-                <label for="slider5">3500Hz</label>
-                <input class="rang" style="margin-left:20px" type="range" id="slider5" value="0" step="1" min="-30" max="30" ></input>
-            <output id="gain4">0 dB</output>
-            </div>
-            <div class="control">
-                <label for="slider6">10000Hz</label>
-                <input class="rang" style="margin-left:10px" type="range" id="slider6" value="0" step="1" min="-30" max="30" oninput="changeGain(this.value, 5);"></input>
-            <output id="gain5">0 dB</output>
-            </div>
-<!--
+       
+            
+           
             <div class="control">
                 <label for="volume">Volume:</label>
                 <input type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
@@ -116,16 +90,17 @@ margin-bottom: 0px;
                 <label for="vitesse">Vitesse:</label>
                 <input type="range" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
                 &nbsp;<span id="vitesseValue">1</span>
-            </div> -->
+            </div> 
         </div>   
-        </div>
-      <!--  <div class="control-auteur">
+       
+        <div class="control-auteur">
             <div class="control auteur">
                 <p>Nouar Rania Manel</p>
                 <p>Gasmi Zeyneb</p>
             </div>
-        </div>   -->
+        </div>   
     </div>
+
     <div class="control controls">
     <input style="width:20px; margin-right:98px" class ="vol" type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
             
@@ -153,14 +128,19 @@ margin-bottom: 0px;
     </div>
     
 </div>
+<label        
+  for="balance" style=" color: white;position: absolute; top: 320px; left: 830px  ">Balance</label>
 
-  
+  <my-balance         style="position: absolute; top: 340px; left: 830px"
+  id ="balance"></my-balance>
+<my-equalizer id="equalizer"></my-equalizer> 
 `;
 
 // ----- CLasse du Web Comppnent ------
 export class MyPlayer extends HTMLElement {
     constructor() {
         super();
+        
         this.attachShadow({ mode: "open" });
 
     }
@@ -168,20 +148,56 @@ export class MyPlayer extends HTMLElement {
     // ici un callback qui sera appelé une fois que le composant
     // sera affiché (on dit "connecté au DOM de la page")
     connectedCallback() {
-        console.log("Composant affiché/connecté au DOM");
-        this.shadowRoot.innerHTML = template.innerHTML;
-
+        this.audioContext = new AudioContext();
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
         // le lecteur audio
         this.player = this.shadowRoot.querySelector("#audio");
         // hide the audio tag
         this.player.style.display = "none";
+        // add the balance
+        this.balance = this.shadowRoot.getElementById("balance");
          // Add the equalizer to the player instance
-        this.equalizer = this.shadowRoot.querySelector("#equalizer");
+        this.equalizer = this.shadowRoot.getElementById("equalizer");
+        //create source node
+        this.sourceNode = this.audioContext.createMediaElementSource(this.player);
+        this.sourceNode.connect(this.audioContext.destination);
+        this.audioNodes = [this.sourceNode];
+        
+        this.equalizer.audioContext = this.audioContext;
+        this.equalizer.addAudioNode = (audioNode) =>
+        this.addAudioNode(audioNode, "equalizer");
+          
+        this.balance.audioContext = this.audioContext;
+        this.balance.addAudioNode = (audioNode) =>
+        this.addAudioNode(audioNode, "balance");
+        
+
+
         this.definirLesEcouteurs();
-  
+        
+
+       
        
     }
-
+      //from Dorian TP
+  async connectAudioNode(audioNode) {
+    //audioNode.name = name;
+    const length = this.audioNodes.length;
+    const previousNode = this.audioNodes[length - 1];
+    previousNode.connect(audioNode);
+    audioNode.connect(this.audioContext.destination);
+  }
+  //from Dorian TP
+  addAudioNode(audioNode, name) {
+    audioNode.name = name;
+    const length = this.audioNodes.length;
+    const previousNode = this.audioNodes[length - 1];
+    previousNode.disconnect();
+    previousNode.connect(audioNode);
+    audioNode.connect(this.audioContext.destination);
+    this.audioNodes.push(audioNode);
+    console.log(`Linked ${previousNode.name || "input"} to ${audioNode.name}`);
+  }
     definirLesEcouteurs() {
         // Fonctions pour jouer, mettre en pause et arrêter la lecture, regler le volume etc.
         this.shadowRoot.querySelector("#volume").addEventListener("input", (evt) => {
@@ -222,6 +238,7 @@ export class MyPlayer extends HTMLElement {
             // evt.target est l'élément qui a déclenché l'événement, c'est le bouton play
             console.log("Play");
             this.player.play();
+            this.audioContext.resume().then(() => {});
         });
         // Fonction pour définir pause
         this.shadowRoot.querySelector("#pause").addEventListener("click", (evt) => {
@@ -237,13 +254,18 @@ export class MyPlayer extends HTMLElement {
             this.player.currentTime = 0;
         });
          // Listen for the 'input' event from the equalizer sliders
-         this.equalizer.querySelectorAll("input[type='range']").forEach((slider, index) => {
+       /*  this.equalizer.querySelectorAll("input[type='range']").forEach((slider, index) => {
         slider.addEventListener("input", () => {
           // Log the value whenever a slider is moved
           console.log(`Slider ${slider.id} value: ${slider.value}`);
-          this.applyEqualizer();
+         // this.applyEqualizer();
         });
+      });*/
+       
+      this.balance.addEventListener("input", ({ target: { value } }) => {
+        this.player.balance = parseFloat(value, 10);
       });
+      
     }
 
     setPlaylist(playlist) {
@@ -260,11 +282,12 @@ export class MyPlayer extends HTMLElement {
             const trackURL = new URL(evt.detail.trackUrl, baseURL);
             this.player.src = trackURL;
             this.player.play();
+            this.audioContext.resume().then(() => {});
         });
 
     }
 
-    applyEqualizer() {
+    /*applyEqualizer() {
         // Create the AudioContext and sourceNode if not already created
         if (!this.context) {
           this.context = new AudioContext();
@@ -318,7 +341,7 @@ export class MyPlayer extends HTMLElement {
         // Update output labels (you can add this if needed)
         // var output = document.querySelector("#gain" + nbFilter);
         // output.value = value + " dB";
-      }
+      }*/
       
     }
     
