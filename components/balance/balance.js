@@ -1,8 +1,8 @@
 import "../../lib/webaudio-controls.js";
 
-///The js was frm Dorian but I worked on the UI to improve it and make it more user friendly
+///Pour ce composant, nous nous sommes basées sur le TP de Dorian pour définir la balance
 const template = document.createElement("template");
-template.innerHTML = /*html*/ `
+template.innerHTML =  `
     <style>
     webaudio-knob {
       --webaudio-knob-size: 100px;

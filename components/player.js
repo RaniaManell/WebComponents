@@ -179,7 +179,7 @@ export class MyPlayer extends HTMLElement {
        
        
     }
-      //from Dorian TP
+      //Le code des fonctions connect audio node et add audio node nous l'avons récupéré du TP de Dorian 
   async connectAudioNode(audioNode) {
     //audioNode.name = name;
     const length = this.audioNodes.length;
@@ -187,7 +187,6 @@ export class MyPlayer extends HTMLElement {
     previousNode.connect(audioNode);
     audioNode.connect(this.audioContext.destination);
   }
-  //from Dorian TP
   addAudioNode(audioNode, name) {
     audioNode.name = name;
     const length = this.audioNodes.length;
@@ -253,15 +252,8 @@ export class MyPlayer extends HTMLElement {
             this.player.pause();
             this.player.currentTime = 0;
         });
-         // Listen for the 'input' event from the equalizer sliders
-       /*  this.equalizer.querySelectorAll("input[type='range']").forEach((slider, index) => {
-        slider.addEventListener("input", () => {
-          // Log the value whenever a slider is moved
-          console.log(`Slider ${slider.id} value: ${slider.value}`);
-         // this.applyEqualizer();
-        });
-      });*/
-       
+   
+       //fonction pour définir une balance
       this.balance.addEventListener("input", ({ target: { value } }) => {
         this.player.balance = parseFloat(value, 10);
       });
@@ -287,62 +279,7 @@ export class MyPlayer extends HTMLElement {
 
     }
 
-    /*applyEqualizer() {
-        // Create the AudioContext and sourceNode if not already created
-        if (!this.context) {
-          this.context = new AudioContext();
-          this.mediaElement = this.shadowRoot.getElementById('audio'); // Assuming your audio element has the id 'audio'
-          this.sourceNode = this.context.createMediaElementSource(this.mediaElement);
-      
-          // Handle the resume on play
-          this.mediaElement.onplay = () => {
-            this.context.resume();
-          }
-      
-          // Create the equalizer filters
-          this.filters = [];
-      
-          // Set filters
-          [60, 170, 350, 1000, 3500, 10000].forEach((freq, i) => {
-            const eq = this.context.createBiquadFilter();
-            eq.frequency.value = freq;
-            eq.type = "peaking";
-            eq.gain.value = 0;
-            this.filters.push(eq);
-          });
-      
-          // Connect filters in series
-          this.sourceNode.connect(this.filters[0]);
-          for (let i = 0; i < this.filters.length - 1; i++) {
-            this.filters[i].connect(this.filters[i + 1]);
-          }
-      
-          // Connect the last filter to the speakers
-          this.filters[this.filters.length - 1].connect(this.context.destination);
-        }
-      
-        // Adjust gain values based on equalizer settings
-        const sliders = this.equalizer.querySelectorAll("input[type='range']");
-        sliders.forEach((slider, index) => {
-          const sliderValue = parseFloat(slider.value);
-          const nbFilter = index; // Assuming the index of the slider corresponds to the filter number
-      
-          // Adjust gain for the specified filter
-          this.changeGain(sliderValue, nbFilter);
-        });
-      
-        console.log("Equalizer settings applied");
-      }
-      
-      changeGain(sliderVal, nbFilter) {
-        const value = parseFloat(sliderVal);
-        this.filters[nbFilter].gain.value = value;
-      
-        // Update output labels (you can add this if needed)
-        // var output = document.querySelector("#gain" + nbFilter);
-        // output.value = value + " dB";
-      }*/
-      
+     
     }
     
     

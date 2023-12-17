@@ -1,7 +1,7 @@
 import "../../lib/webaudio-controls.js";
 const template = document.createElement("template");
 
-template.innerHTML = /*html*/ `
+template.innerHTML =  `
     <style>
  
     .webaudioctrl-label {
