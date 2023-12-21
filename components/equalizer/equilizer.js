@@ -8,9 +8,10 @@ template.innerHTML =  `
       height: 0px !important;
   }
     </style>
-    <div class="container" style="position: absolute;bottom:0px; top: 80px; left: 630px">
+    <div class="container" style="position: absolute;bottom:0px; top: 2px; left: 30px">
   <div class="controls" style="display:grid">
-  <p id="label_0" style="  font-size:12px; color:white;margin-top:0px">0dB</p>
+
+<div>
 
     <webaudio-slider
     src="components/equalizer/hsliderbody.png"
@@ -25,12 +26,14 @@ template.innerHTML =  `
     knobheight=24
     ditchlength=100
     tooltip="equalizer1"    
-    id="equalizer1"    
+    id="equalizer1"   
+    style="margin-top: 8px" 
 
   >
   </webaudio-slider>
-</div>
-<p id="label_1" style="  font-size:12px; color:white;margin-top:5px">0dB</p>
+  <label id="label_0" style="font-size:12px; color:#eaac2f;margin-top:0px">0dB</label>
+  </div>
+  <div>
 
     <webaudio-slider
     src="components/equalizer/hsliderbody.png"
@@ -46,15 +49,13 @@ template.innerHTML =  `
     ditchlength=100
     tooltip="equalizer2"    
     id="equalizer2""    
-
+    style="margin-top: 8px" 
   >
- 
-
     </webaudio-slider>
+    <label id="label_1" style="font-size:12px; color:#eaac2f;margin-top:0px">0dB</label>
+</div>
 
- 
-    <p id="label_2" style="font-size:12px; color:white;margin-top:5px">0dB</p>
-
+<div> 
     <webaudio-slider
     src="components/equalizer/hsliderbody.png"
     knobsrc="components/equalizer/hsliderknob.png"
@@ -69,12 +70,14 @@ template.innerHTML =  `
     ditchlength=100
     tooltip="equalizer3"    
     id="equalizer3"    
-
+    style="margin-top: 8px" 
   >
 
     </webaudio-slider>
-    <p id="label_3" style="font-size:12px; color:white;margin-top:5px">0dB</p>
+    <label id="label_2" style="font-size:12px; color:#eaac2f;margin-top:0px">0dB</label>
+</div>
 
+<div>
     <webaudio-slider
     src="components/equalizer/hsliderbody.png"
     knobsrc="components/equalizer/hsliderknob.png"
@@ -89,12 +92,14 @@ template.innerHTML =  `
     ditchlength=100
     tooltip="equalizer4"    
     id="equalizer4"    
-
+    style="margin-top: 8px" 
   >
 
     </webaudio-slider>
-    <p id="label_4"style="font-size:12px; color:white;margin-top:5px">0dB</p>
+    <label id="label_3" style="font-size:12px; color:#eaac2f;margin-top:0px">0dB</label>
+</div>
 
+<div>  
     <webaudio-slider
     src="components/equalizer/hsliderbody.png"
     knobsrc="components/equalizer/hsliderknob.png"
@@ -109,12 +114,14 @@ template.innerHTML =  `
     ditchlength=100
     tooltip="equalizer5"    
     id="equalizer5"    
-
+    style="margin-top: 8px" 
   >
 
     </webaudio-slider>
-    <p id="label_5" style="font-size:12px; color:white;margin-top:5px">0dB</p>
+    <label id="label_4" style="font-size:12px; color:#eaac2f;margin-top:0px">0dB</label>
+</div>
 
+<div> 
     <webaudio-slider
     src="components/equalizer/hsliderbody.png"
     knobsrc="components/equalizer/hsliderknob.png"
@@ -129,10 +136,12 @@ template.innerHTML =  `
     ditchlength=100
     tooltip="equalizer6"    
     id="equalizer6"    
-
+    style="margin-top: 8px" 
   >
-
     </webaudio-slider>
+    <label id="label_5" style="font-size:12px; color:#eaac2f;margin-top:0px">0dB</label>
+</div>
+    </div>
     </div>`
    ;
 

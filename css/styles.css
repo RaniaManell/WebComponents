@@ -37,14 +37,9 @@ align-items: center;
   padding-right: 0px;
   padding-bottom: 0px;
   margin: 0px;
+  margin-left: 20px;
 }
-.playler-box {
-  padding-top: 140PX;
-  padding-left: 100px;
-  color: #fff; /* Texte blanc */
-  height: 100%; 
-  width: 300px;
-}
+
 .playlist-box {
   border-color: #a17653;
   border-style: solid;
@@ -78,7 +73,7 @@ align-items: center;
 .control-auteur{
   width:170px;
   position: absolute;
-  top: 110px; /* Replace 100px with your desired y-coordinate */
+  top: 100px; /* Replace 100px with your desired y-coordinate */
   left: 320px;
 }
 .cont{

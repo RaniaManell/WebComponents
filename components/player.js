@@ -26,8 +26,8 @@ template.innerHTML = `
 .controls {
     width: 700px;
     padding-top: 0px;
-    margin-top: 44px;
-    padding-left: 30px;
+    margin-top: 180px;
+    padding-left: 155px;
 
 }
 .btn {background-color: #838388;
@@ -55,54 +55,31 @@ margin-bottom: 0px;
 }
 .autre-controls{
     width: 50%;
-}
-.control-auteur{
-    width: 50%;
-}
-.rang{
-    accent-color:#eaac2f
-}
-.vol{
-    margin-right: 120px;
-    accent-color:#eaac2f
-}
-.vit{
-    margin-left: 120px;
-    accent-color:#eaac2f
+    margin-left: 320px;
+    margin-top: 10px;
 
 }
-
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
 
 
 <div class="audio-controls">
     <div class="div-controls">
-        <div class="autre-controls">
-       
-            
-           
-            <div class="control">
-                <label for="volume">Volume:</label>
-                <input type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
+        <div class="autre-controls">              
+            <div class="control" style=" margin-left:10px">
+                <label style=" color: #eaac2f" for="volume">-</label>
+                <input type="range" style=" accent-color: #eaac2f" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
+                <label style=" color: #eaac2f" for="volume">+</label>
             </div>
             <div class="control">
-                <label for="vitesse">Vitesse:</label>
-                <input type="range" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
-                &nbsp;<span id="vitesseValue">1</span>
+                <label style=" color: #eaac2f; font-size:12px" for="vitesse">0.5</label>
+                <input type="range" style=" accent-color: #eaac2f" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
+                &nbsp;<span style=" color: #eaac2f;font-size:12px" id="vitesseValue">1</span>
             </div> 
-        </div>   
-       
-        <div class="control-auteur">
-            <div class="control auteur">
-                <p>Nouar Rania Manel</p>
-                <p>Gasmi Zeyneb</p>
-            </div>
         </div>   
     </div>
 
     <div class="control controls">
-    <input style="width:20px; margin-right:98px" class ="vol" type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="2">
             
         <button class ="btn" id="previous"><i class="fas fa-step-backward"></i></button>
         <!-- Icône pour Previous -->
@@ -114,8 +91,7 @@ margin-bottom: 0px;
         <!-- Icône pour Stop -->
         <button class ="btn" id="next"><i class="fas fa-step-forward"></i></button>
         <!-- Icône pour Next -->
-        <input style="width:20px; margin-left:90px" class ="vit" type="range" id="vitesse" name="vitesse" min="0.5" max="2" step="0.1" value="1">
-        <span id="vitesseValue" style="display:none">1</span>    
+   
     </div>
 
 
@@ -129,10 +105,13 @@ margin-bottom: 0px;
     
 </div>
 <label        
-  for="balance" style=" color: white;position: absolute; top: 320px; left: 830px  ">Balance</label>
-
-  <my-balance         style="position: absolute; top: 340px; left: 830px"
+  for="balance" style=" color: white;font-size:12px;position: absolute; top: 312px; left: 35px  ">Balance 1 </label>
+  <my-balance style="position: absolute; top: 249px; left: 33px"
   id ="balance"></my-balance>
+  <label        
+  for="balance" style=" font-size:12px;color: white;position: absolute; top: 312px; left: 435px  ">Balance 2</label>
+  <my-balance style="position: absolute; top: 249px; left: 433px"
+  id ="balance2"></my-balance>
 <my-equalizer id="equalizer"></my-equalizer> 
 `;
 
@@ -156,6 +135,8 @@ export class MyPlayer extends HTMLElement {
         this.player.style.display = "none";
         // add the balance
         this.balance = this.shadowRoot.getElementById("balance");
+        // add the balance 2
+        this.balance2 = this.shadowRoot.getElementById("balance2");
          // Add the equalizer to the player instance
         this.equalizer = this.shadowRoot.getElementById("equalizer");
         //create source node
@@ -170,6 +151,10 @@ export class MyPlayer extends HTMLElement {
         this.balance.audioContext = this.audioContext;
         this.balance.addAudioNode = (audioNode) =>
         this.addAudioNode(audioNode, "balance");
+
+        this.balance2.audioContext = this.audioContext;
+        this.balance2.addAudioNode = (audioNode) =>
+        this.addAudioNode(audioNode, "balance2");
         
 
 
