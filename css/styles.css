@@ -21,7 +21,7 @@ align-items: center;
   flex-direction: column;
   align-items: center;
 }
-s
+
 .box {
   display: flex;
   width: 640px;
@@ -37,7 +37,7 @@ s
   padding-right: 0px;
   padding-bottom: 0px;
   margin: 0px;
-  margin-left: 20px;
+  margin-left: 5px;
 }
 
 .playlist-box {
